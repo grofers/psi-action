@@ -1,7 +1,7 @@
 const core = require("@actions/core");
 const psi = require("psi");
 
-const requiredMetrics = ["first-contentful-paint", "speed-index", "largest-contentful-paint", "interactive", "total-blocking-time", "cumulative-layout-shift"];
+// const requiredMetrics = ["first-contentful-paint", "speed-index", "largest-contentful-paint", "interactive", "total-blocking-time", "cumulative-layout-shift"];
 const run = async () => {
   try {
     const url = core.getInput("url") || "https://seller.blinkit.com";
@@ -23,7 +23,7 @@ const run = async () => {
       format: "cli",
       threshold
     });
-    core.setOutput("performance_metrics", data.lighthouseResult.categories.performance.auditRefs.filter(audit => requiredMetrics.includes(audit.id))?.map(audit => ({[audit.id]: audit.weight})));
+    // core.setOutput("performance_metrics", data.lighthouseResult.categories.performance.auditRefs.filter(audit => requiredMetrics.includes(audit.id))?.map(audit => ({[audit.id]: audit.weight})));
     core.setOutput("performance_score", 100*data.lighthouseResult.categories.performance.score);
   } catch (error) {
     core.setFailed(error.message);
